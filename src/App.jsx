@@ -1,9 +1,9 @@
 import "./App.css";
 import HeroSection from "./components/HeroSection";
-import Navbar from "./components/navbar";
 import Projects from "./components/Projects";
 import Products from "./components/Products";
 import Services from "./components/Services";
+import Navbar from "./components/Navbar-TEMP";
 function App() {
   return (
     <>
