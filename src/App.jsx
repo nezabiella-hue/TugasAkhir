@@ -1,10 +1,6 @@
-import "./App.css";
-import HeroSection from "./components/HeroSection";
-import Projects from "./components/Projects";
-import Products from "./components/Products";
-import Services from "./components/Services";
-import Navbar from "./components/Navbar-TEMP";
-function App() {
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar-TEMP.jsx";
+export default function App() {
   return (
     <>
       <header>
@@ -12,15 +8,8 @@ function App() {
       </header>
 
       <main>
-        <HeroSection />
-        <Projects />
-        <Products />
-        <Services />
+        <Outlet />
       </main>
-
-      <footer></footer>
     </>
   );
 }
-
-export default App;
