@@ -1,11 +1,59 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:opsz,wght@8..144,200..800&display=swap");
 @import "tailwindcss";
 
 @theme {
-  /* Typography */
   --font-jakarta: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
 
   /* Brand Colors */
-  --color-coral: #ff8364;
-  --color-inkblack: #1b1b1d;
+  --color-coral: rgba(255, 131, 100, 1);
+  --color-inkblack: rgba(27, 27, 29, 1);
+  --color-darkgrey: rgba(91, 91, 91, 1);
+}
+
+:root {
+  font-family: var(--font-jakarta);
+}
+
+@keyframes pillFloatUpDown {
+  0% {
+    transform: translate3d(var(--tx, 0), 0, 0);
+  }
+  50% {
+    transform: translate3d(var(--tx, 0), -8px, 0);
+  }
+  100% {
+    transform: translate3d(var(--tx, 0), 0, 0);
+  }
+}
+
+.pill-float {
+  animation: pillFloatUpDown 4.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+.pill-float--slow {
+  animation-duration: 6.2s;
+}
+
+.pill-float--delay {
+  animation-delay: 0.6s;
+}
+
+@keyframes scroll-bounce {
+  0% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+}
+
+.animate-scroll-bounce {
+  animation: scroll-bounce 0.85s ease-in-out infinite;
 }

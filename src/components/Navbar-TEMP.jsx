@@ -1,62 +1,42 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
-const SUGGESTIONS = [
-  "UI/UX Designer",
-  "Mobile App UI",
-  "Website Redesign",
-  "Landing Page",
-  "Figma",
-  "Wireframe",
-  "Design System",
-  "Logo Design",
-  "Branding",
-  "Illustration",
-  "Social Media Design",
-  "Motion Graphics",
-  "Frontend Developer",
-  "React",
-  "Next.js",
-  "Tailwind CSS",
-  "WordPress",
-  "Backend Developer",
-  "Node.js",
-  "API Integration",
-  "SEO",
-  "Copywriting",
-  "Translation",
-  "Data Entry",
-  "Virtual Assistant",
-  "Game Artist",
-];
+import Logo from "./BitsAndBops/logo";
+import { SEARCH_SUGGESTIONS } from "../data/searchSuggestion";
 
 export default function Navbar() {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
 
-  const filtered = SUGGESTIONS.filter((item) =>
+  const filtered = SEARCH_SUGGESTIONS.filter((item) =>
     item.toLowerCase().includes(query.toLowerCase())
   ).slice(0, 6);
 
+  const LOGO_NUDGE_PX = -8;
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
+    <nav className="fixed left-0 right-0 top-0 z-50">
       <div className="mx-auto mt-4 max-w-[1512px] px-8">
-        <div className="h-[80px] rounded-2xl border border-white/30 bg-white/40 backdrop-blur-md shadow-sm flex items-center px-8">
-          {/* Logo */}
-          <div className="flex items-center gap-4">
+        <div className="flex h-[101px] items-center rounded-2xl border border-white/30 bg-white/40 px-8 shadow-sm backdrop-blur-md">
+          {/* LOGO */}
+          <div className="flex items-center">
             <Link
               to="/"
-              className="text-2xl font-extrabold tracking-tight text-neutral-900 whitespace-nowrap hover:opacity-90"
+              className="whitespace-nowrap hover:opacity-90"
+              style={{ transform: `translateY(${LOGO_NUDGE_PX}px)` }}
             >
-              projects<span className="text-orange-500">.</span>
+              <Logo
+                size="28px"
+                className="leading-none"
+                ariaLabel="Projects Home"
+              />
             </Link>
           </div>
 
           {/* Search */}
-          <div className="hidden md:flex flex-1 justify-center">
+          <div className="hidden flex-1 justify-center md:flex">
             <div className="relative w-[380px] lg:w-[440px]">
               <svg
-                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-500"
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--color-darkgrey)]"
                 viewBox="0 0 24 24"
                 fill="none"
               >
@@ -78,12 +58,16 @@ export default function Navbar() {
                 onFocus={() => setOpen(true)}
                 onBlur={() => setTimeout(() => setOpen(false), 120)}
                 placeholder="Cari skill, tools, atau keyword…"
-                className="h-10 w-full rounded-full border border-neutral-200/70 bg-white/70 pl-10 pr-4 text-sm text-neutral-900 shadow-sm outline-none placeholder:text-neutral-500 focus:bg-white focus:ring-4 focus:ring-orange-200/60"
+                className={[
+                  "h-10 w-full rounded-full border border-neutral-200/70 bg-white/70",
+                  "pl-10 pr-4 text-sm shadow-sm outline-none",
+                  "text-[var(--color-inkblack)] placeholder:text-[var(--color-darkgrey)]",
+                  "focus:bg-white focus:ring-4 focus:ring-[color:var(--color-coral)]/30",
+                ].join(" ")}
               />
 
-              {/* Dropdown */}
               {open && query && (
-                <div className="absolute top-12 w-full rounded-xl border border-neutral-200 bg-white shadow-lg overflow-hidden">
+                <div className="absolute top-12 w-full overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-lg">
                   {filtered.length > 0 ? (
                     filtered.map((item) => (
                       <button
@@ -92,13 +76,17 @@ export default function Navbar() {
                           setQuery(item);
                           setOpen(false);
                         }}
-                        className="w-full px-4 py-2 text-left text-sm hover:bg-orange-50 hover:text-orange-600"
+                        className={[
+                          "w-full px-4 py-2 text-left text-sm",
+                          "text-[var(--color-inkblack)]",
+                          "hover:bg-[color:var(--color-coral)]/10 hover:text-[var(--color-coral)]",
+                        ].join(" ")}
                       >
                         {item}
                       </button>
                     ))
                   ) : (
-                    <div className="px-4 py-2 text-sm text-neutral-400">
+                    <div className="px-4 py-2 text-sm text-[var(--color-darkgrey)]">
                       Tidak ada hasil
                     </div>
                   )}
@@ -108,34 +96,64 @@ export default function Navbar() {
           </div>
 
           {/* Links */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-neutral-800">
-            <Link to="/projects" className="text-orange-500 hover:opacity-80">
-              {" "}
-              Cari Proyek{" "}
+          <div className="hidden items-center gap-8 text-sm font-semibold md:flex">
+            <Link
+              to="/projects"
+              className="text-[var(--color-coral)] hover:opacity-80"
+            >
+              Cari Proyek
             </Link>
-            <a href="#" className="hover:opacity-80">
+
+            <a
+              href="#"
+              className="text-[var(--color-inkblack)] hover:opacity-80"
+            >
               Buat Proyek
             </a>
-            <a href="#" className="hover:opacity-80">
+            <a
+              href="#"
+              className="text-[var(--color-inkblack)] hover:opacity-80"
+            >
               Servis
             </a>
-            <a href="#" className="hover:opacity-80">
+            <a
+              href="#"
+              className="text-[var(--color-inkblack)] hover:opacity-80"
+            >
               Produk
             </a>
-            <a href="#" className="hover:opacity-80">
+            <a
+              href="#"
+              className="text-[var(--color-inkblack)] hover:opacity-80"
+            >
               Komunitas
             </a>
-            <a href="#" className="hover:opacity-80">
+            <a
+              href="#"
+              className="text-[var(--color-inkblack)] hover:opacity-80"
+            >
               Afiliasi
             </a>
           </div>
 
           {/* Actions */}
           <div className="ml-8 flex items-center gap-3">
-            <button className="h-10 rounded-full border bg-white/70 px-5 text-sm font-semibold">
+            <button
+              className={[
+                "h-10 rounded-full border px-5 text-sm font-semibold",
+                "bg-white/70 text-[var(--color-inkblack)]",
+                "hover:bg-white/90",
+              ].join(" ")}
+            >
               Daftar
             </button>
-            <button className="h-10 rounded-full bg-orange-400 px-5 text-sm font-semibold text-white">
+
+            <button
+              className={[
+                "h-10 rounded-full px-5 text-sm font-semibold text-white",
+                "bg-[var(--color-coral)] hover:opacity-90",
+              ].join(" ")}
+            >
               Masuk
             </button>
           </div>
